@@ -1,0 +1,19 @@
+Objectives: Review C/C++ programming (pointers, structs, arrays, and dynamic memory allocation) and setting up Linux OS on your machine (virtual machine, USB boot, or dual boot)
+
+Note on implementation: To avoid reworking the assignment, implement this program "to the letter" of the specifications.
+
+Program specifications: For this assignment, you will write a C/C++ program (on 64-bit machine) to maintain a fixed size library of 1024 documents, whose size randomly ranges between 2MB to 3MB. This library is managed in a FIFO fashion. The software also maintains a separate, fixed size C-style struct (named recent_list) containing 128 pointers that points to a different set of individually initialized documents, whose size randomly ranges between 2MB to 3MB. At start up, every document is individually initialized with random upper case letters: A to Z. Duplicate documents are permitted.
+
+Separately, the software maintains a dictionary of words: FIRST, CPP, REVIEW, PROGRAM, ASSIGNMENT, CECS, BEACH, ECS, FALL, SPRING, OS, MAC, LINUX, WINDOWS, LAB. A randomly chosen word from the dictionary is searched (FIFO, i.e. pointer 0 to pointer 127) in every document of the recent_list struct. A document in the recent_list struct whose substring(s) does not match the searched word is ejected/moved to the end of the library & reinitialized (same length), and the first document from the library is copied to the end of the recent_list. Therefore, the documents in each list would be constantly shifting relatively. For example, the documents copied from the library to the recent_list are inserted in the same order that they were copied.
+
+For the program demonstration:
+Prompt the user to enter a word from the dictionary (until the user chooses to quit). Search for the word in the currently updated recent_list. Your program outputs the selected word and the number of documents in the recent_list that were ejected.
+
+Sample scenarios:
+The word CPP is chosen and found in all of the documents in the recent_list. Next, the word ASSIGNMENT is chosen but is not found in 3 of the documents of the list.
+
+Resulting list & library:
+Compact the remaining 125 documents of the recent_list (i.e. move documents up to fill any gap), and the first 3 documents of the library are moved to the end of the recent_list sequentially. The remaining 1021 documents in the library are also moved up, and the 3 ejected documents from the recently_list are now at the end of the library, whose contents are reinitialized.
+
+Sample output:
+CPP: 0 document ejected ASSIGNMENT: 3 documents ejected & reinitialized
